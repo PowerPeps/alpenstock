@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x-anchor — Alpenstock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme.js"></script>
+  <script src="../src/x-icon.js"></script>
+  <script src="../src/x-anchor.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+<body class="doc-body" x-data>
+
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="arrow-left" class="w-4 h-4 inline-block"></span>
+      Alpenstock
+    </a>
+    <a href="https://github.com/PowerPeps/alpenstock" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="github" class="w-4 h-4 inline-block"></span>
+      GitHub
+    </a>
+  </nav>
+
+  <main class="doc-main">
+
+    <h1 class="doc-h1">x-anchor</h1>
+    <p class="doc-lead">Anchors an element to a <code class="doc-code">$refs</code> target using the CSS Anchor Positioning API.</p>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Usage</h2>
+      <div x-data="{ copied: false }" class="relative group">
+        <pre class="doc-pre"><code>&lt;div x-data&gt;
+  &lt;button x-ref="btn"&gt;Anchor target&lt;/button&gt;
+  &lt;div x-anchor.bottom.right="btn"&gt;Anchored element&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Example</h2>
+      <div class="doc-demo p-8 flex justify-center items-start min-h-32">
+        <div x-data style="position: relative;">
+          <button x-ref="btn" class="px-3 py-1.5 bg-[#21262d] border border-[#30363d] rounded text-sm cursor-default">
+            Anchor target
+          </button>
+          <div x-anchor.bottom.right="btn" class="bg-[#1f6feb] text-white text-xs px-2 py-1 rounded whitespace-nowrap mt-1">
+            Anchored element
+          </div>
+        </div>
+      </div>
+      <p class="doc-hint">Requires a Chromium-based browser (CSS Anchor Positioning API).</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Expression</h2>
+      <p class="doc-p">Name of a <code class="doc-code">$refs</code> reference to anchor to.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Modifiers</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">.top</code>
+          <span class="pt-0.5">aligns to the top edge of the anchor</span>
+        </div>
+        <div class="doc-row">
+          <code class="doc-tag">.bottom</code>
+          <span class="pt-0.5">aligns to the bottom edge</span>
+        </div>
+        <div class="doc-row">
+          <code class="doc-tag">.left</code>
+          <span class="pt-0.5">aligns to the left edge</span>
+        </div>
+        <div class="doc-row">
+          <code class="doc-tag">.right</code>
+          <span class="pt-0.5">aligns to the right edge</span>
+        </div>
+      </div>
+      <p class="doc-sub mt-2">Modifiers can be combined: <code class="doc-code">.bottom.left</code></p>
+    </section>
+
+    <section>
+      <h2 class="doc-h2">Notes</h2>
+      <div class="doc-note">
+        Requires the <a href="https://caniuse.com/css-anchor-positioning">CSS Anchor Positioning API</a>. Currently supported in Chromium-based browsers.
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

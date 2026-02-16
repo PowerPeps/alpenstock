@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x-icon — Alpenstock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme.js"></script>
+  <script src="../src/x-icon.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+<body class="doc-body" x-data>
+
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="arrow-left" class="w-4 h-4 inline-block"></span>
+      Alpenstock
+    </a>
+    <a href="https://github.com/PowerPeps/alpenstock" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="github" class="w-4 h-4 inline-block"></span>
+      GitHub
+    </a>
+  </nav>
+
+  <main class="doc-main">
+
+    <h1 class="doc-h1">x-icon</h1>
+    <p class="doc-lead">Injects an SVG icon from a provider into the element.</p>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Usage</h2>
+      <div x-data="{ copied: false }" class="relative group">
+        <pre class="doc-pre"><code>&lt;span x-icon:pixel="arrow-left" class="w-5 h-5"&gt;&lt;/span&gt;
+&lt;span x-icon:lucide="circle-check" class="w-5 h-5"&gt;&lt;/span&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Example</h2>
+      <div class="doc-demo p-6">
+        <div class="flex flex-wrap gap-4 items-center">
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:pixel="arrow-left" class="w-6 h-6"></span>
+            <span class="text-[#7d8590] text-xs">arrow-left</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:pixel="arrow-right" class="w-6 h-6"></span>
+            <span class="text-[#7d8590] text-xs">arrow-right</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:pixel="github" class="w-6 h-6"></span>
+            <span class="text-[#7d8590] text-xs">github</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:pixel="copy" class="w-6 h-6"></span>
+            <span class="text-[#7d8590] text-xs">copy</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:pixel="check" class="w-6 h-6"></span>
+            <span class="text-[#7d8590] text-xs">check</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:pixel="drag-and-drop" class="w-6 h-6"></span>
+            <span class="text-[#7d8590] text-xs">drag-and-drop</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:lucide="star" class="w-6 h-6 text-[#f78534]"></span>
+            <span class="text-[#7d8590] text-xs">lucide: star</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span x-icon:lucide="zap" class="w-6 h-6 text-[#58a6ff]"></span>
+            <span class="text-[#7d8590] text-xs">lucide: zap</span>
+          </div>
+        </div>
+      </div>
+      <p class="doc-hint">SVG attributes (class, style, etc.) are forwarded to the injected icon.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Expression</h2>
+      <p class="doc-p">Name of the icon within the provider.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Providers</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">:pixel</code>
+          <span class="pt-0.5"><a href="https://pixelarticons.com" class="doc-ext">pixelarticons</a> — pixel art icon set</span>
+        </div>
+        <div class="doc-row">
+          <code class="doc-tag">:lucide</code>
+          <span class="pt-0.5"><a href="https://lucide.dev" class="doc-ext">lucide</a> — clean, consistent icon set</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="doc-h2">Notes</h2>
+      <div class="doc-note">
+        SVG responses are cached per URL. The element is replaced by the injected <code>&lt;svg&gt;</code> node. All non-<code>x-icon</code> attributes are forwarded.
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

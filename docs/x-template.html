@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x-template — Alpenstock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme.js"></script>
+  <script src="../src/x-icon.js"></script>
+  <script src="../src/x-template.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+<body class="doc-body" x-data>
+
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="arrow-left" class="w-4 h-4 inline-block"></span>
+      Alpenstock
+    </a>
+    <a href="https://github.com/PowerPeps/alpenstock" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="github" class="w-4 h-4 inline-block"></span>
+      GitHub
+    </a>
+  </nav>
+
+  <main class="doc-main">
+
+    <h1 class="doc-h1">x-template</h1>
+    <p class="doc-lead">Renders <code class="doc-code">{expression}</code> placeholders in element content using Alpine reactive data.</p>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Usage</h2>
+      <div x-data="{ copied: false }" class="relative group">
+        <pre class="doc-pre"><code>&lt;div x-data="{ name: 'world', count: 0 }"&gt;
+  &lt;p x-template&gt;Hello, {name}! Clicked {count} times.&lt;/p&gt;
+  &lt;input x-model="name" placeholder="name"&gt;
+  &lt;button @click="count++"&gt;Click&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Example</h2>
+      <div class="doc-demo p-6">
+        <div x-data="{ name: 'world', count: 0 }" class="space-y-4">
+          <p x-template>Hello, {name}! Clicked {count} times.</p>
+          <div class="flex gap-3">
+            <input x-model="name"
+                   class="px-3 py-1.5 bg-[#0d1117] border border-[#30363d] rounded text-sm focus:border-[#58a6ff] outline-none w-36"
+                   placeholder="name">
+            <button @click="count++"
+                    class="px-3 py-1.5 bg-[#21262d] border border-[#30363d] rounded text-sm hover:border-[#8b949e] transition-colors cursor-pointer">
+              Click
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Expression</h2>
+      <p class="doc-p">None. The directive reads the element's innerHTML as a template.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Syntax</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">{key}</code>
+          <span class="pt-0.5">evaluated as an Alpine expression</span>
+        </div>
+        <div class="doc-row">
+          <code class="doc-tag">\{ \}</code>
+          <span class="pt-0.5">renders as literal braces</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Modifiers</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">.html</code>
+          <span class="pt-0.5">renders result as innerHTML instead of textContent</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="doc-h2">Notes</h2>
+      <div class="doc-note">
+        The template is captured once at init. Placeholders are reactive via <code>Alpine.effect</code>.
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

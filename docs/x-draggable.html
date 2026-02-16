@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x-draggable — Alpenstock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme.js"></script>
+  <script src="../src/x-icon.js"></script>
+  <script src="../src/x-draggable.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+<body class="doc-body" x-data>
+
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="arrow-left" class="w-4 h-4 inline-block"></span>
+      Alpenstock
+    </a>
+    <a href="https://github.com/PowerPeps/alpenstock" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="github" class="w-4 h-4 inline-block"></span>
+      GitHub
+    </a>
+  </nav>
+
+  <main class="doc-main">
+
+    <h1 class="doc-h1">x-draggable</h1>
+    <p class="doc-lead">Makes an element draggable within one or more <code class="doc-code">$refs</code> containers.</p>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Usage</h2>
+      <div x-data="{ copied: false }" class="relative group">
+        <pre class="doc-pre"><code>&lt;div x-data&gt;
+  &lt;div x-ref="zone"&gt;
+    &lt;div x-draggable="zone"&gt;Drag me&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Example</h2>
+      <div class="doc-demo" style="height: 160px; position: relative; overflow: hidden;">
+        <div x-data style="position: relative; width: 100%; height: 100%;">
+          <div x-ref="zone" style="position: relative; width: 100%; height: 100%;">
+            <div x-draggable="zone" class="flex items-center justify-center w-24 h-12 bg-[#21262d] border border-[#30363d] rounded text-sm select-none">
+              Drag me
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Expression</h2>
+      <p class="doc-p">Space-separated names of <code class="doc-code">$refs</code> containers. The element is constrained within the union of all containers. When dragged into another container, it is reparented to it.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Modifiers</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">.opacity</code>
+          <span class="pt-0.5">reduces opacity when dragged outside any container</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="doc-h2">Notes</h2>
+      <div class="doc-note">
+        Supports mouse and touch events. The element receives <code>position: absolute</code> automatically.
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

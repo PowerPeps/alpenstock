@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x-write — Alpenstock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme.js"></script>
+  <script src="../src/x-icon.js"></script>
+  <script src="../src/x-write.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+<body class="doc-body" x-data>
+
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="arrow-left" class="w-4 h-4 inline-block"></span>
+      Alpenstock
+    </a>
+    <a href="https://github.com/PowerPeps/alpenstock" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="github" class="w-4 h-4 inline-block"></span>
+      GitHub
+    </a>
+  </nav>
+
+  <main class="doc-main">
+
+    <h1 class="doc-h1">x-write</h1>
+    <p class="doc-lead">Reveals text character by character.</p>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Usage</h2>
+      <div x-data="{ copied: false }" class="relative group">
+        <pre class="doc-pre"><code>&lt;p x-write="40"&gt;The quick brown fox jumps over the lazy dog.&lt;/p&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Example</h2>
+      <div class="doc-demo p-6">
+        <div x-data="{ show: true }" class="space-y-4">
+          <template x-if="show">
+            <p x-write="40" class="font-mono">The quick brown fox jumps over the lazy dog.</p>
+          </template>
+          <button @click="show = false; $nextTick(() => show = true)"
+                  class="px-3 py-1.5 bg-[#21262d] border border-[#30363d] rounded text-sm hover:border-[#8b949e] transition-colors cursor-pointer">
+            Replay
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Expression</h2>
+      <p class="doc-p">Delay between characters in milliseconds. Defaults to <code class="doc-code">0</code>.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Modifiers</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">.[ms]</code>
+          <span class="pt-0.5">start delay in milliseconds before the animation begins</span>
+        </div>
+      </div>
+      <div x-data="{ copied: false }" class="relative group mt-3">
+        <pre class="doc-pre"><code>&lt;p x-write.500="30"&gt;Starts after 500ms&lt;/p&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="doc-h2">Notes</h2>
+      <div class="doc-note">
+        Sets <code>aria-label</code> to the original text for accessibility. The animation uses <code>requestAnimationFrame</code>.
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

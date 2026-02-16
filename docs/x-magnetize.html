@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x-magnetize — Alpenstock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme.js"></script>
+  <script src="../src/x-icon.js"></script>
+  <script src="../src/x-draggable.js"></script>
+  <script src="../src/x-magnetize.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+<body class="doc-body" x-data>
+
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="arrow-left" class="w-4 h-4 inline-block"></span>
+      Alpenstock
+    </a>
+    <a href="https://github.com/PowerPeps/alpenstock" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="github" class="w-4 h-4 inline-block"></span>
+      GitHub
+    </a>
+  </nav>
+
+  <main class="doc-main">
+
+    <h1 class="doc-h1">x-magnetize</h1>
+    <p class="doc-lead">Positions an element at the barycenter of <code class="doc-code">$refs</code> targets.</p>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Usage</h2>
+      <div x-data="{ copied: false }" class="relative group">
+        <pre class="doc-pre"><code>&lt;div x-data&gt;
+  &lt;div x-ref="a"&gt;A&lt;/div&gt;
+  &lt;div x-ref="b"&gt;B&lt;/div&gt;
+  &lt;div x-magnetize.live="a b"&gt;•&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Example</h2>
+      <div class="doc-demo" style="height: 200px; position: relative; overflow: hidden;">
+        <div x-data style="position: relative; width: 100%; height: 100%;">
+          <div x-ref="arena" style="position: relative; width: 100%; height: 100%;">
+            <div x-ref="a" x-draggable="arena"
+                 class="flex items-center justify-center w-12 h-12 bg-[#388bfd33] border border-[#1f6feb] rounded-full text-xs font-bold text-[#58a6ff] select-none"
+                 style="left: 40px; top: 40px;">A</div>
+            <div x-ref="b" x-draggable="arena"
+                 class="flex items-center justify-center w-12 h-12 bg-[#f7853433] border border-[#f78534] rounded-full text-xs font-bold text-[#f78534] select-none"
+                 style="left: 140px; top: 100px;">B</div>
+          </div>
+          <div x-magnetize.live="a b"
+               class="flex items-center justify-center w-8 h-8 bg-[#21262d] border border-[#30363d] rounded-full text-xs pointer-events-none select-none">•</div>
+        </div>
+      </div>
+      <p class="doc-hint">Drag A and B — the dot tracks their center.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Expression</h2>
+      <p class="doc-p">Space or comma-separated names of <code class="doc-code">$refs</code> targets.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Modifiers</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">.live</code>
+          <span class="pt-0.5">updates position on every animation frame</span>
+        </div>
+        <div class="doc-row">
+          <code class="doc-tag">.rotate</code>
+          <span class="pt-0.5">rotates the element along the axis of the first two targets</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="doc-h2">Notes</h2>
+      <div class="doc-note">
+        Without <code>.live</code>, position updates on resize and scroll. The element is positioned with <code>position: fixed</code> and <code>z-index: 1000</code>.
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

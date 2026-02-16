@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x-json — Alpenstock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js"></script>
+  <script src="../src/x-icon.js"></script>
+  <script src="../src/x-json.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+<body class="doc-body" x-data>
+
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="arrow-left" class="w-4 h-4 inline-block"></span>
+      Alpenstock
+    </a>
+    <a href="https://github.com/PowerPeps/alpenstock" class="doc-link flex items-center gap-1.5">
+      <span x-icon:pixel="github" class="w-4 h-4 inline-block"></span>
+      GitHub
+    </a>
+  </nav>
+
+  <main class="doc-main">
+
+    <h1 class="doc-h1">x-json</h1>
+    <p class="doc-lead">Fetches JSON from a URL and renders it via a <a href="https://jsonata.org" class="doc-ext">jsonata</a> expression.</p>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Usage</h2>
+      <div x-data="{ copied: false }" class="relative group">
+        <pre class="doc-pre"><code>&lt;span x-json="https://jsonplaceholder.typicode.com/todos/1 | title"&gt;&lt;/span&gt;</code></pre>
+        <button @click="navigator.clipboard.writeText($el.previousElementSibling.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="doc-copy">
+          <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Example</h2>
+      <div x-data class="doc-demo px-4 py-4 font-mono text-sm">
+        <span class="text-[#7d8590]">title: </span>
+        <span x-json="https://jsonplaceholder.typicode.com/todos/1 | title"></span>
+      </div>
+      <p class="doc-hint">Fetched live from <code class="doc-code">jsonplaceholder.typicode.com</code>.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Expression</h2>
+      <p class="doc-p"><code class="doc-code">"url | jsonata expression"</code> — omit the expression to render the full JSON response.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Modifiers</h2>
+      <div class="doc-table">
+        <div class="doc-row">
+          <code class="doc-tag">.html</code>
+          <span class="pt-0.5">renders as innerHTML instead of textContent</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="doc-h2">Dependencies</h2>
+      <p class="doc-p">Requires <a href="https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js" class="doc-ext">jsonata</a> loaded before Alpine.</p>
+    </section>
+
+    <section>
+      <h2 class="doc-h2">Notes</h2>
+      <div class="doc-note">
+        Responses are cached per URL. The request is aborted on cleanup.
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
